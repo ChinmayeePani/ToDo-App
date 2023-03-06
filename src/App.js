@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [data, setData] = useState("");
+  const [list, setList] = useState([]);
+  function addActivity(){
+    setList((list) => {
+      const updatedList=[...list, data]
+      console.log(updatedList)
+      setData('');
+      return updatedList
+    })
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="container">
+        <div className="header">TODO LIST</div>
+        <input
+          type="text"
+          placeholder="Add Data"
+          className="inputbox"
+          value={data}
+          onChange={(e) => setData(e.target.value)}
+        />
+        <button className="btn" onClick={addActivity}>ADD</button>
+        <p className="list">Here is your List :</p>
+        {
+          list.map((i) => {
+            return(
+              <p className="para">{i}</p>
+            )
+          })
+          
+        }
+        
+      </div>
+    </>
   );
 }
 
